@@ -672,14 +672,13 @@ class Adapter(nn.Module):
 class SAM2Encoder(nn.Module):
     def __init__(self, checkpoint_path='sam2_hiera_large.pt') -> None:
         super(SAM2Encoder, self).__init__()    
-        # 配置模型
+
         model_cfg = "sam2_hiera_l.yaml"
         if checkpoint_path:
             model = build_sam2(model_cfg, checkpoint_path)
         else:
             model = build_sam2(model_cfg )
             
-        # 删除不需要的组件
         del model.sam_mask_decoder
         del model.sam_prompt_encoder
         del model.memory_encoder
